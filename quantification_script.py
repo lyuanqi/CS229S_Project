@@ -266,8 +266,8 @@ def save_result(tool_name, loop_type, k_range, loop_range):
     while(len(k_range)!=len(accuracy_matrix[0])):
         k_range = np.delete(k_range,len(k_range)-1)
 
-    accuracy_matrix = np.delete(accuracy_matrix,(0),axis=0)
-    runtime_matrix = np.delete(runtime_matrix,(0),axis=0)
+    # accuracy_matrix = np.delete(accuracy_matrix,(0),axis=0)
+    # runtime_matrix = np.delete(runtime_matrix,(0),axis=0)
 
     save_result_matrix_as_csv(tool_name,"accuracy",loop_type,k_range,loop_range,accuracy_matrix)
     save_result_matrix_as_csv(tool_name,"runtime",loop_type,k_range,loop_range,runtime_matrix)
