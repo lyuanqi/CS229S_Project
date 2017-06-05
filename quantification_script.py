@@ -266,6 +266,9 @@ def save_result(tool_name, loop_type, k_range, loop_range):
     while(len(k_range)!=len(accuracy_matrix[0])):
         k_range = np.delete(k_range,len(k_range)-1)
 
+    accuracy_matrix = np.delete(accuracy_matrix,(0),axis=0)
+    runtime_matrix = np.delete(runtime_matrix,(0),axis=0)
+
     save_result_matrix_as_csv(tool_name,"accuracy",loop_type,k_range,loop_range,accuracy_matrix)
     save_result_matrix_as_csv(tool_name,"runtime",loop_type,k_range,loop_range,runtime_matrix)
     plot_accuracy_for_tool(tool_name, loop_type, loop_range, k_range, accuracy_matrix)
@@ -274,26 +277,20 @@ def save_result(tool_name, loop_type, k_range, loop_range):
 
 def main():
     init()
-    ## test ranges
-    # k_range = np.arange(31,35,2)
-    # coverage_range = np.arange(20,40,10)
-    # error_rate_range = np.arange(0.005,0.02,0.005)
-    # readlen_range = np.arange(80,110,10)
-
-    ## real ranges
+    # range settings
     k_range = []
-    # coverage_range = np.arange(10,50,10)
     coverage_range = [1,10,20,30,40]
-
     error_rate_range = np.arange(0.0,0.08,0.01)
-    readlen_range = np.arange(70,130,10)
+    readlen_range = np.arange(80,130,10)
 
     ranges_dict = {}
-    # ranges_dict["coverage"] = coverage_range
+    ranges_dict["coverage"] = coverage_range
     ranges_dict["error_rate"] = error_rate_range
     ranges_dict["readlen"] = readlen_range
 
-    tools = ["kallisto"]
+    # tools = ["kallisto"]
+    tools = ["rnaskim", "sailfish", "salmon", "kallisto"]
+
     for tool_name in tools:
         if tool_name == "rnaskim":
             k_range = np.arange(21,76,1)
